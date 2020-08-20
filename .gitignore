@@ -5,4 +5,5 @@ node_modules/
 __pycache__
 **/not_used.ts
 package-lock.json
+yarn.lock
 dist
