@@ -1,0 +1,8 @@
+# node_modules
+node_modules/
+**/.DS_Store
+**/.env
+__pycache__
+**/not_used.ts
+package-lock.json
+dist
