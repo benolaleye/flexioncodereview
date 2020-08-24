@@ -26,6 +26,7 @@ export class AppController extends BaseRoute {
 
             if (conclude && head !== tail) {
                 const { correct, message } = AppService.convert(head, tail, type, $value, $student_answer);
+                console.log(correct + '-----' + message);
                 return res.status(200).json({ correct, message });
             }
 
