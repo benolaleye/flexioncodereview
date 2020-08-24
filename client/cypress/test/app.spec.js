@@ -1,3 +1,9 @@
+describe('Loading the app', function () {
+    it('Should load the app successfully', function () {
+        cy.visit('/');
+    });
+});
+
 describe('Testing the form inputs and submission', function () {
     beforeEach(() => {
         cy.visit('/');
@@ -25,5 +31,22 @@ describe('Testing the form inputs and submission', function () {
 });
 
 describe('Testing for API request', function () {
-    it('Should be able to connect with API and get data');
+    it('Should be able to connect with API and get data', function () {
+        cy.server();
+        cy.route({
+            url: `/api/types`,
+            method: 'GET',
+            status: 200,
+        });
+    });
+
+    it('Should successfully post data to the server', function () {
+        cy.server();
+        cy.route('POST', '/api/convert', {
+            input_value: '84.2',
+            student_response: '543.94',
+            head: 'FAHRENHEIT',
+            tail: 'RANKINE',
+        });
+    });
 });
