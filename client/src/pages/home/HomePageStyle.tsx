@@ -20,7 +20,7 @@ export const HomePageStyle = styled.div`
             .horizontal__line {
                 width: 100px;
                 height: 2px;
-                background-color: red;
+                background-color: grey !important;
                 margin: auto;
             }
         }

@@ -4,7 +4,6 @@ import { HomePageStyle } from './HomePageStyle';
 import { CustomInput } from '../../components/CustomInput';
 import { CustomSelect } from '../../components/CustomSelect';
 import { CustomButton } from '../../components/CustomButton';
-import { data } from '../../constants/data';
 import { converterSchema } from '../../utils/helpers';
 
 const URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000';
@@ -13,6 +12,7 @@ export const HomePage = () => {
     const [loading, setLoading] = React.useState(false);
     const [result, setResult] = React.useState('');
     const [error, setError] = React.useState('');
+    const [types, setTypes] = React.useState([]);
 
     const postData = (payload: any) => {
         fetch(`${URL}/api/convert`, {
@@ -29,6 +29,12 @@ export const HomePage = () => {
             .catch((e) => {
                 setError('Network connectivity issues');
             });
+    };
+
+    const fetchData = () => {
+        fetch(`${URL}/api/types`)
+            .then((res) => res.json())
+            .then((data) => setTypes((types) => types.concat(data)));
     };
 
     const handleFieldChange = React.useCallback(async (values) => {
@@ -62,13 +68,17 @@ export const HomePage = () => {
         return `${result[0].toUpperCase()}${result.slice(1)}`;
     };
 
+    React.useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <HomePageStyle>
             <div className="inner">
                 <div className="form__wrapper">
                     <h1>
                         <span>Unit</span>
-                        <small>Converter</small>
+                        <small style={{ color: '#DC7633' }}>Converter</small>
                     </h1>
                     <div className="horizontal__line"></div>
                     <div className="content__wrapper">
@@ -84,7 +94,7 @@ export const HomePage = () => {
                                         <option value="" disabled>
                                             Select Input Unit of Measure
                                         </option>
-                                        {data.map(({ id, item, type }) => (
+                                        {types.map(({ id, item, type }) => (
                                             <option key={id} value={[item, type]}>
                                                 {slugify_string(item)}
                                             </option>
@@ -94,7 +104,7 @@ export const HomePage = () => {
                                         <option value="" disabled>
                                             Select Target Unit of Measure
                                         </option>
-                                        {data.map(({ id, item, type }) => (
+                                        {types.map(({ id, item, type }) => (
                                             <option key={id} value={[item, type]}>
                                                 {slugify_string(item)}
                                             </option>
