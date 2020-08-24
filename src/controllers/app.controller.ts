@@ -37,7 +37,6 @@ export class AppController extends BaseRoute {
 
     public async getTypes(req: Request, res: Response) {
         try {
-            console.log(data);
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error });
