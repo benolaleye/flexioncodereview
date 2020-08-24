@@ -6,7 +6,7 @@
     "scripts": {
         "start": "npm run build && node dist/server.js",
         "dev": "ts-node-dev src/server.ts",
-        "build": "tsc && cd client && npm run build",
+        "build": "tsc && cd client && npm install && npm run build",
         "watch": "tsc -watch",
         "remove": "rm -rf ./dist",
         "prebuild": "npm run remove",
