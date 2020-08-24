@@ -9,17 +9,26 @@ interface FormTextInputProps {
     className?: string;
     name: string;
     label?: string;
+    id?: string;
     inputProps?: React.ComponentPropsWithoutRef<'select'>;
 }
 
-export const CustomSelect: React.FC<FormTextInputProps> = ({ name, children, label, inputProps, ...props }) => {
+export const CustomSelect: React.FC<FormTextInputProps> = ({ name, id, children, label, inputProps, ...props }) => {
     const { validState, validationClass, validationProps, field, meta, focusClass } = useFieldHooks(name);
 
     return (
-        <CustomInputContainer {...props}>
+        <CustomInputContainer>
             <CustomLabel>{label}</CustomLabel>
             <div className={`form-text__body` + validationClass + focusClass} id={name}>
-                <CustomSelectStyle className="form-text__input" children={children} {...inputProps} {...field} {...validationProps} />
+                <CustomSelectStyle
+                    className="form-text__input"
+                    id={id}
+                    children={children}
+                    {...inputProps}
+                    {...field}
+                    {...validationProps}
+                    {...props}
+                />
             </div>
             {validState === false ? (
                 <React.Fragment>

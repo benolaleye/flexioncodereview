@@ -9,7 +9,6 @@ import { converterSchema } from '../../utils/helpers';
 const URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000';
 
 export const HomePage = () => {
-    const [loading, setLoading] = React.useState(false);
     const [result, setResult] = React.useState('');
     const [error, setError] = React.useState('');
     const [types, setTypes] = React.useState([]);
@@ -23,12 +22,8 @@ export const HomePage = () => {
             body: JSON.stringify(payload),
         })
             .then((res) => res.json())
-            .then((data) => {
-                setResult(data.message);
-            })
-            .catch((e) => {
-                setError('Network connectivity issues');
-            });
+            .then((data) => setResult(data.message))
+            .catch((e) => setError('Network connectivity issues'));
     };
 
     const fetchData = () => {
@@ -37,25 +32,18 @@ export const HomePage = () => {
             .then((data) => setTypes((types) => types.concat(data)));
     };
 
-    const handleFieldChange = React.useCallback(async (values) => {
+    const handleFormSubmit = React.useCallback(async (values) => {
         try {
-            setLoading(true);
             setResult('');
             const { input_value, student_response, head, tail } = values;
             const headValue = head.split(',');
             const tailValue = tail.split(',');
 
-            if (headValue[1] !== tailValue[1]) {
-                setLoading(false);
-                return setResult('invalid');
-            }
-
+            if (headValue[1] !== tailValue[1]) return setResult('invalid');
             const payload = { head: headValue[0], tail: tailValue[0], answer: student_response, input_value };
             postData(payload);
-            setLoading(false);
         } catch (error) {
             setError('Something went wrong');
-            setLoading(false);
         }
     }, []);
 
@@ -84,13 +72,13 @@ export const HomePage = () => {
                     <div className="content__wrapper">
                         <Formik
                             initialValues={{ input_value: '', student_response: '', head: '', tail: '' }}
-                            onSubmit={handleFieldChange}
+                            onSubmit={handleFormSubmit}
                             validationSchema={converterSchema}
                         >
-                            {({ handleSubmit }) => (
+                            {({ handleSubmit, isSubmitting }) => (
                                 <form onSubmit={handleSubmit}>
-                                    <CustomInput type="text" placeholder="Ex. 84.2" name="input_value" label="Input Value" />
-                                    <CustomSelect name="head" label="From Measurement (Unit)">
+                                    <CustomInput type="text" placeholder="Ex. 84.2" name="input_value" label="Input Value" id="input_value" />
+                                    <CustomSelect name="head" label="From Measurement (Unit)" id="option1">
                                         <option value="" disabled>
                                             Select Input Unit of Measure
                                         </option>
@@ -100,7 +88,7 @@ export const HomePage = () => {
                                             </option>
                                         ))}
                                     </CustomSelect>
-                                    <CustomSelect name="tail" label="To Measurement (Unit)">
+                                    <CustomSelect name="tail" label="To Measurement (Unit)" id="option2">
                                         <option value="" disabled>
                                             Select Target Unit of Measure
                                         </option>
@@ -110,9 +98,15 @@ export const HomePage = () => {
                                             </option>
                                         ))}
                                     </CustomSelect>
-                                    <CustomInput type="text" placeholder="Ex. 543.94" name="student_response" label="Student Response" />
-                                    <CustomButton type="submit" disabled={loading}>
-                                        {loading ? 'Computing...' : 'Submit'}
+                                    <CustomInput
+                                        type="text"
+                                        placeholder="Ex. 543.94"
+                                        name="student_response"
+                                        label="Student Response"
+                                        id="student_response"
+                                    />
+                                    <CustomButton type="submit" disabled={isSubmitting}>
+                                        {isSubmitting ? 'Computing...' : 'Submit'}
                                     </CustomButton>
                                 </form>
                             )}
@@ -121,8 +115,7 @@ export const HomePage = () => {
                 </div>
                 <div className="result__wrapper">
                     {error !== '' && <code>{error}</code>}
-                    {loading && <img src={require('../../assets/images/loader.gif')} alt="loader" />}
-                    {!loading && result !== '' && (
+                    {result !== '' && (
                         <span className={`result ${result === 'incorrect' || result === 'invalid' ? 'invalid' : 'valid'}`}>{result}</span>
                     )}
                 </div>

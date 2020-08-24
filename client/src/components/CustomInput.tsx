@@ -66,14 +66,15 @@ interface FormTextInputProps {
     label?: string;
     type?: 'number' | 'text';
     disabled?: boolean;
+    id?: string;
     inputProps?: React.ComponentPropsWithoutRef<'input'>;
 }
 
-export const CustomInput: React.FC<FormTextInputProps> = ({ placeholder, name, type, children, label, disabled, inputProps, ...props }) => {
+export const CustomInput: React.FC<FormTextInputProps> = ({ placeholder, name, type, id, children, label, disabled, inputProps, ...props }) => {
     const { ref, validState, validationClass, validationProps, field, meta, focusClass } = useFieldHooks(name);
 
     return (
-        <CustomInputContainer {...props}>
+        <CustomInputContainer>
             <CustomLabel>{label}</CustomLabel>
             <div className={`form-text__body` + validationClass + focusClass} id={name}>
                 <CustomInputStyle
@@ -82,10 +83,12 @@ export const CustomInput: React.FC<FormTextInputProps> = ({ placeholder, name, t
                     type={type}
                     children={children}
                     disabled={disabled}
+                    id={id}
                     ref={ref}
                     {...inputProps}
                     {...field}
                     {...validationProps}
+                    {...props}
                 />
             </div>
             {validState === false ? (
