@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: unit-conversion-service
+spec:
+    type: LoadBalancer
+    ports:
+        - port: 80
+          targetPort: 8000
+    selector:
+        app: unit-conversion-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: unit-conversion-app
+spec:
+    replicas: 3
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxUnavailable: 2
+            maxSurge: 2
+    selector:
+        matchLabels:
+            app: unit-conversion-app
+    template:
+        metadata:
+            labels:
+                app: unit-conversion-app
+        spec:
+            containers:
+                - name: unit-conversion-app
+                  image: CONTAINER_IMAGE
+                  ports:
+                      - containerPort: 8000

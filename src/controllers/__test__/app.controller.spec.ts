@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 chai.should();
 
 describe('App Controller test spec', function () {
-    describe('Endpoint should return the appropriate responses', function () {
+    describe('Endpoints should return the appropriate responses', function () {
         try {
             it('Should return conversion response', function () {
                 chai.request('http://localhost:8000')
@@ -23,7 +23,7 @@ describe('App Controller test spec', function () {
                     });
             });
 
-            it('Should return invalid when invalid request', function () {
+            it('Should return invalid when it an invalid request', function () {
                 chai.request('http://localhost:8000')
                     .post('/api/convert')
                     .type('form')
@@ -38,6 +38,16 @@ describe('App Controller test spec', function () {
                         res.should.have.status(200);
                         res.body.should.have.property('message', 'invalid');
                         res.body.should.be.a('object');
+                    });
+            });
+
+            it('Should return all conversion types', function () {
+                chai.request('http://localhost:8000')
+                    .get('/api/types')
+                    .end((err, res) => {
+                        if (err) console.log(err);
+                        res.should.have.status(200);
+                        res.body.should.be.a('array').to.have.lengthOf(10);
                     });
             });
         } catch (error) {

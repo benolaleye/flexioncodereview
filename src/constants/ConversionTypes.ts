@@ -24,6 +24,19 @@ export enum VTypes {
 export const TemperatureTypes = [ITypes.CELSIUS, ITypes.FAHRENHEIT, ITypes.KELVIN, ITypes.RANKINE];
 export const VolumeTypes = [VTypes.CUBIC_FEETS, VTypes.LITRES, VTypes.CUPS, VTypes.CUBIC_INCHES, VTypes.GALLONS, VTypes.TABLESPOONS];
 
+export const data = [
+    { id: 1, type: ConversionTypes.TEMPERATURE, item: ITypes.KELVIN },
+    { id: 2, type: ConversionTypes.TEMPERATURE, item: ITypes.CELSIUS },
+    { id: 3, type: ConversionTypes.TEMPERATURE, item: ITypes.RANKINE },
+    { id: 4, type: ConversionTypes.TEMPERATURE, item: ITypes.FAHRENHEIT },
+    { id: 5, type: ConversionTypes.VOLUME, item: VTypes.LITRES },
+    { id: 6, type: ConversionTypes.VOLUME, item: VTypes.GALLONS },
+    { id: 7, type: ConversionTypes.VOLUME, item: VTypes.CUPS },
+    { id: 8, type: ConversionTypes.VOLUME, item: VTypes.TABLESPOONS },
+    { id: 9, type: ConversionTypes.VOLUME, item: VTypes.CUBIC_INCHES },
+    { id: 10, type: ConversionTypes.VOLUME, item: VTypes.CUBIC_FEETS },
+];
+
 export const temperatureConversionResult: Array<any> = [
     {
         x: ITypes.KELVIN,
