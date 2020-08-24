@@ -40,4 +40,8 @@ Please follow the instructions below to run or install the application:
 -   Build a mini package/library to handle the conversion.
 -   Make it app run as a frontend app only.
 
-Thank you!
+### Live URL
+
+Open [http://a76468beb5e5149fca2e467c597be3b7-1016725763.us-east-1.elb.amazonaws.com](http://a76468beb5e5149fca2e467c597be3b7-1016725763.us-east-1.elb.amazonaws.com) .
+
+### Enjoy!
