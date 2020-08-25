@@ -4,9 +4,9 @@ Our users are science teachers who are as comfortable using the command line as 
 
 ## Features
 
--   Conversion for temperature units
--   Conversion for volume units
--   Responsive for mobile
+- Conversion for temperature units
+- Conversion for volume units
+- Responsive for mobile
 
 ## Technologies Used
 
@@ -30,18 +30,18 @@ Amazon Codepipeline and Amazon EKS
 
 Please follow the instructions below to run or install the application:
 
--   Clone the project using `git clone`.
--   On the root folder of the project run `yarn install` to add dependencies of the project.
--   Then run `yarn start` to start the project.
--   Or run `docker build -t unitconverter .` to build the docker image and `docker run -p 80:8000 unitconverter` to run the image on your local machine.
+- Clone the project using `git clone`.
+- On the root folder of the project run `yarn install` to add dependencies of the project.
+- Then run `yarn start` to start the project.
+- Or run `docker build -t unitconverter .` to build the docker image and `docker run -p 80:8000 unitconverter` to run the image on your local machine.
 
 ### Future Improvement
 
--   Build a mini package/library to handle the conversion.
--   Make the app run as a frontend app only.
--   Add data persistency feature to store students questions and responses.
--   Improve on the UI to make it more elegant and colorful.
--   Add unit tests to the frontend components.
+- Build a mini package/library to handle the conversion.
+- Make the app run as a frontend app only.
+- Add data persistency feature to store students questions and responses.
+- Improve on the UI to make it more elegant and colorful.
+- A proper documentation of backend (Swagger Doc) and frontend (using Storybook).
 
 ### Live URL
 
