@@ -38,7 +38,10 @@ Please follow the instructions below to run or install the application:
 ### Future Improvement
 
 -   Build a mini package/library to handle the conversion.
--   Make it app run as a frontend app only.
+-   Make the app run as a frontend app only.
+-   Add data persistency feature to store students questions and responses.
+-   Improve on the UI to make it more elegant and colorful.
+-   Add unit tests to the frontend components.
 
 ### Live URL
 

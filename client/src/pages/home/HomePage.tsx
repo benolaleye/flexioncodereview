@@ -78,7 +78,7 @@ export const HomePage = () => {
                         >
                             {({ handleSubmit, isSubmitting }) => (
                                 <form onSubmit={handleSubmit}>
-                                    <CustomInput type="text" placeholder="Ex. 84.2" name="input_value" label="Input Value" id="input_value" />
+                                    <CustomInput type="text" placeholder="Ex. 84.2" name="input_value" label="Input Question" id="input_value" />
                                     <CustomSelect name="head" label="From Measurement (Unit)" id="option1">
                                         <option value="" disabled>
                                             Select Input Unit of Measure
