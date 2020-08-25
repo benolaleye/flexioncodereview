@@ -14,6 +14,7 @@ export const HomePage = () => {
     const [types, setTypes] = React.useState([]);
 
     const postData = (payload: any) => {
+        setError('');
         fetch(`${URL}/api/convert`, {
             method: 'POST',
             headers: {
